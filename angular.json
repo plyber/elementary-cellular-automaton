@@ -6,6 +6,9 @@
     "ElementaryCA": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:application": {
+          "strict": false
+        },
         "@schematics/angular:component": {
           "inlineTemplate": true,
           "inlineStyle": true,

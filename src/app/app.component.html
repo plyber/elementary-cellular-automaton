@@ -1,0 +1,26 @@
+<div>
+    <a href="https://mathworld.wolfram.com/images/eps-svg/ElementaryCA_850.svg" target="_blank">Reguli notabile</a><br>
+    <a href="https://mathworld.wolfram.com/ElementaryCellularAutomaton.html" target="_blank">Setul complet de reguli cu
+        illustrații</a><br>
+    <form #form="ngForm">
+        <label for="size">dimensiunea simulării: </label>
+        <input [(ngModel)]="this.size" id="size" max="100" min="3" name="size" required type="number">
+        <label for="rule">regula: </label>
+        <input [(ngModel)]="this.rule" id="rule" max="255" min="0" name="rule" required type="number">
+        <div class="button-section">
+            <button (click)="initialize(size, rule)" [disabled]="!form.valid" type="button">inițializează</button>
+            <button (click)="evolve()" [disabled]="!form.valid || this.automatonService.history.length<=0"
+                    type="button">următoarea generație</button>
+        </div>
+        <div class="simulation-info">
+            <p>dimensiunea: {{this.automatonService.cells.length}}</p>
+            <p>regula: {{this.automatonService.ruleNumber}}</p>
+            <p>generația: {{this.automatonService.history.length}}</p>
+        </div>
+    </form>
+    <div *ngFor="let generation of automatonService.history" class="automaton">
+        <div *ngFor="let digit of generation" [ngClass]="digit==1 ? 'alive' : 'dead'">
+            <p>{{digit}}</p>
+        </div>
+    </div>
+</div>
